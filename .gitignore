@@ -1,0 +1,7 @@
+data/*
+analysis_template/*
+looper_test/*
+dist/*
+build/*
+api_token
+./.pypirc

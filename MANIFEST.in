@@ -1,0 +1,7 @@
+include divissr/templates/*cpp
+include divissr/lib/divissr_fasta_template.html
+include divissr/lib/divissr_fastq_template.html
+include divissr/lib/src/*js
+include divissr/lib/styles/*css
+include divissr/lib/*jpg
+include divissr/*.h

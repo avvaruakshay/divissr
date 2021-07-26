@@ -1,0 +1,208 @@
+#navbar {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    top: 100px; right: 0px; bottom: 0px; left: 20px;
+    z-index: 100;
+    opacity: 0.5
+}
+
+#navbar:hover {
+    opacity: 1;
+}
+
+body {
+    font-family: 'Ubuntu Mono', 'Arial';
+    margin: 0px;
+}
+
+.section {
+    width: 90%;
+    margin-left: 5%;
+}
+
+.section-header {
+    font-weight: bold;
+    font-size: 1.6em;
+    background-color: #303030;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.section-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 20px 0px;
+    font-size: 1.2rem;
+    border: 1px dashed #303030;
+    border-top: none;
+    border-bottom: none;
+}
+
+.header-nav-button {
+    font-weight: bold;
+    background-color: #9e9e9e;
+    color: #303030;
+    cursor: pointer;
+}
+
+.header-nav-button:hover {
+    background-color: #4e4e4e;
+    color: #dddddd;
+}
+
+.title-dropdown {
+    cursor: pointer;
+}
+
+.title-dropdown:hover {
+    background-color: #4e4e4e;
+    color: #dddddd;
+}
+
+.title-dropdown.content > div:hover {
+    background-color: #4e4e4e;
+    color: #dddddd;
+}
+
+.title-dropdown.content.inactive {
+    visibility: hidden;
+}
+
+.title-dropdown.content.active {
+    visibility: visible;
+}
+
+table { 
+    width: 100%;
+    background-color: #dddddd;
+}
+
+thead tr:first-child > th {
+    padding: 10px 10px;
+    position: sticky !important;
+    top: 0;
+    z-index: 2;
+    background-color: #d4d4d4;
+    white-space: nowrap;
+}
+
+tbody tr td {
+    text-align: center;
+    background-color: white;
+    color: #303030;
+    padding: 10px 10px;
+}
+
+.chart-options {
+    background-color: #303030;
+    position: relative;
+    /* left: 5%; */
+    width: 100%;
+    z-index: 2;
+}
+
+.chart-options.inactive {
+    max-height: 0px;
+    transition-property: max-height;
+    transition-duration: 1s;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+    transition-delay: 0s;
+    -webkit-transition-property: max-height;
+    -webkit-transition-duration: 1s;
+    -webkit-transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+    -webkit-transition-delay: 0s;
+}
+
+.chart-options.active {
+    max-height: 1000px;
+    transition-property: max-height;
+    transition-duration: 1s;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+    transition-delay: 0s;
+    -webkit-transition-property: max-height;
+    -webkit-transition-duration: 1s;
+    -webkit-transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+    -webkit-transition-delay: 0s;
+}
+
+.chart-options.active div {
+    visibility: visible;
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
+    transition-delay: 0.5s;
+    -webkit-transition-property: opacity;
+    -webkit-transition-duration: 0.5s;
+    -webkit-transition-timing-function: linear;
+    -webkit-transition-delay: 0.5s;
+}
+
+.chart-options.inactive div {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.dropdown-button:hover {
+    background-color: #4e4e4e;
+    color: white;
+}
+
+.select-dropdown.content {
+    cursor: pointer;
+}
+
+.select-dropdown.content div:hover {
+    background-color: #4e4e4e;
+    color: white;
+}
+
+.select-dropdown.content.active {
+    visibility: visible;
+}
+
+.select-dropdown.content.inactive {
+    visibility: hidden;
+}
+
+.select-dropdown.content.active div {
+    visibility: visible;
+}
+
+.select-dropdown.content.inactive div {
+    visibility: hidden;
+}
+
+.ms-container {
+    width: 100% !important;
+}
+
+.ms-container div {
+    width: 48% !important;
+}
+
+#plot-button {
+    float: right;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.4rem;
+    background-color: #9e9e9e;
+    color: #303030;
+    margin-right: 10%;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+#plot-button:hover {
+    background-color: #4e4e4e;
+    color: #dddddd;
+}
+
+.radio-option {
+    cursor: pointer;
+}

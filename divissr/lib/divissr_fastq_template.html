@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Looper analysis report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"> 
+    <script>
+        {fontawesome_js}
+    </script>
+    <style>
+        {multiselect_css}
+    </style>
+    <style>
+        {main_css}
+    </style>
+</head>
+<body>
+    
+    <!-- Header section -->
+    <div style="margin-bottom: 20px; padding: 20px; background-color: #303030; color: white; display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-evenly; align-items: baseline;">
+        <div style="font-size: 1.4rem; font-weight: bold">Looper Analysis report</div>
+        <div style="font-size: 1.4rem; background-color: #4e4e4e; font-weight: bold; border-radius: 5px; padding: 5px; cursor: pointer;">
+            <a href="https://www.github.com/avvaruakshay/looper.git" style="color: white; text-decoration: none" target="_blank"><i class="fab fa-github"></i> LOOPER</a>
+        </div>
+    </div>
+
+    <div class="ui hidden divider"></div>
+    <!-------------------- Summary section -------------------->
+    <div class="section">
+        <div class="section-header"> SEQUENCE INFO </div>
+        <div class="section-content">
+            <div class="item" style="padding: 10px 10px">
+                <span style="font-weight: bold;">File name: </span>
+                <span class="value FileName">./here/there/there/there/here/left/rightHomo sapiens.fna</span>
+            </div> 
+            <div class="item" style="padding: 10px 10px">
+                <span style="font-weight: bold;">Total Reads: </span>
+                <span class="value TotalReads">3.24GB</span>
+            </div> 
+            <div class="item" style="padding: 10px 10px">
+                <span style="font-weight: bold;">TotalBases: </span>
+                <span class="value TotalBases">45.4</span>
+            </div>
+            <div class="item" id="read-len-chart" style="margin-top: 20px; width: 100%; height: 150px; order: 3"></div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="section-header"> REPEATS INFO </div>
+        <div class="section-content">
+            <div class="item" style="padding: 10px 10px; order: 1">
+                <span style="font-weight: bold;">Repeat Reads: </span>
+                <span class="value RepeatReads">4631324</span>
+            </div> 
+            <div class="item" style="padding: 10px 10px; order: 1">
+                <span style="font-weight: bold;">Total Repeats: </span>
+                <span class="value TotalRepeats">69.09 Mb</span>
+            </div> 
+            <div class="item" style="padding: 10px 10px; order: 1">
+                <span style="font-weight: bold;">Repeat Bases: </span>
+                <span class="value RepeatBases">45.4</span>
+            </div> 
+            <div class="item" style="padding: 10px 10px; order: 2">
+                <span style="font-weight: bold;">Repeat classes: </span>
+                <span class="value NumRepClasses">545</span>
+            </div>
+            <div class="item" style="padding: 10px 10px; order: 2">
+                <span style="font-weight: bold;">% Repeat Reads: </span>
+                <span class="value PercentRepeatReads">545</span>% 
+            </div>
+            </div>
+            <div class="item" id="kmer-chart" style="margin-top: 20px; width: 100%; height: 150px; order: 3"></div>
+        </div>
+    </div>
+
+    <!-------------------- Table section -------------------->
+    <div class="section">
+        <div class="section-header" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: baseline; padding: 0px"> 
+            <div class="header-nav-button" title="Previous" style="padding: 12px 15px" onclick="tableNav(change=-1, current=3)"> <i class="fas fa-arrow-left"></i> </div>
+            <div style="padding: 12px 15px" class="title-dropdown" onclick="titleDropDown('table title-dropdown')">
+                <span id="table-title">REPEATS SUMMARY</span>
+                <i class="fas fa-caret-down"></i>
+            </div>
+            <div class="header-nav-button" title="Next" style="padding: 12px 15px" onclick="tableNav(change=1, current=3)"> <i class="fas fa-arrow-right"></i> </div>
+        </div>
+        <div class="section-content" style="padding: 0px">
+            <div class="title-dropdown table content inactive" style="position: absolute; z-index: 10; background-color: #303030; color: white; font-weight: bold">
+                <div style="padding: 5px 15px" onclick="tableNav(change=3, current=0)">REPEAT SUMMARY</div>
+                <div style="padding: 5px 15px" onclick="tableNav(change=3, current=1)">LONGEST REPEATS</div>
+                <div style="padding: 5px 15px" onclick="tableNav(change=3, current=2)">MOST UNITS</div>
+            </div>
+            <div id="data-table" style="width: 100%; height: 40vh; overflow-y: scroll;"></div>
+        </div>
+    </div>
+
+    <!-- Main charts  -->
+    <div class="section">
+        
+        <div class="section-header" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: baseline; padding: 0px"> 
+            <div class="header-nav-button" title="Previous" style="padding: 12px 15px" onclick="chartNav(change=-1, current=3)"> <i class="fas fa-arrow-left"></i> </div>
+            <div style="padding: 12px 15px" class="title-dropdown" onclick="titleDropDown('chart title-dropdown')">
+                <span id="charts-title">REPEAT ABUNDANCE</span>
+                <i class="fas fa-caret-down"></i>
+            </div>
+            <div class="header-nav-button" title="Next" style="padding: 12px 15px" onclick="chartNav(change=1, current=3)"> <i class="fas fa-arrow-right"></i> </div>
+        </div>
+
+        <div class="section-content" style="padding: 0px; border-bottom: 1px dashed black;">
+            <div class="title-dropdown chart content inactive" style="position: absolute; z-index: 10; background-color: #303030; color: white; font-weight: bold">
+                <div style="padding: 5px 15px" onclick="chartNav(change=3, current=0)">REPEAT ABUNDANCE</div>
+                <div style="padding: 5px 15px" onclick="chartNav(change=3, current=1)">K-MER DISTRIBUTION</div>
+                <div style="padding: 5px 15px" onclick="chartNav(change=3, current=2)">LENGTH vs FREQUENCY</div>
+            </div>
+            <div class="header-nav-button" onclick="openOptions()" title="Options" style="z-index: 3; padding: 12px 15px; font-size: 1.2em; position: absolute; left: calc(5%); margin-top: 20px"><i class="fas fa-cogs"></i></div>
+            <div class="chart-options inactive" style="padding: 0px">
+                <div style="margin-top: 50px; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-evenly; background-color: #303030; color: white">
+
+                    <div>
+                        <div style="margin-top: 20px; min-width: 300px;">
+                            <div style="width: 100%; white-space: nowrap; text-align: center;font-weight: bold; font-size: 1.2em; margin-bottom: 10px; color: white;">Repeat Selection </div>
+                            <div style="width: 100%">
+                                <select multiple="multiple" id="repeat-select" name="repeat-select">
+                                    {repeat_options}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin: 20px 0px; font-weight: bold; font-size: 1em;">----- OR -----</div>
+                        
+                        <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-evenly; background-color: #303030">
+                            <div style="padding: 5px 5px; background-color: #303030; color: white; margin-top: 10px"> Show </div>
+                            <div style="background-color: white; color: #303030; margin-top: 10px">
+                                <div style="display: flex; flex-direction: row; flex-wrap: nowrap;">
+                                    <div style="padding: 7px 10px" class="select-dropdown title repeats-order">Top</div>
+                                    <div style="padding: 7px 10px; cursor: pointer; border-left: 1px dashed #303030" class="dropdown-button" onclick="selectDropDownOpen('select-dropdown content repeats-order')">
+                                        <i class="fas fa-caret-down"></i>
+                                    </div>
+                                </div>
+                                <div style="background-color: #dedede; color: #303030; position: absolute;" class="select-dropdown content repeats-order inactive">
+                                    <div style="padding: 2px 5px" onclick="changeOrderRepeatOrder('Top')">Top</div>
+                                    <div style="padding: 2px 5px" onclick="changeOrderRepeatOrder('Least')">Least</div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 10px">
+                                <input type="number" style="width: 80px; margin-left: 10px" id="num-order-repeats" name="quantity" min="1" value="10" onchange="orderedRepeatsNumChange()">
+                            </div>
+                            <div style="padding: 5px 10px; margin-top: 10px"> by </div>
+                            <div style="background-color: white; color: #303030; margin-top: 10px">
+                                <div style="display: flex; flex-direction: row; flex-wrap: nowrap;">
+                                    <div style="padding: 7px 10px" class="select-dropdown title repeats-order-datatype">Frequency</div>
+                                    <div style="padding: 7px 10px; cursor: pointer; border-left: 1px dashed #303030" class="dropdown-button" onclick="selectDropDownOpen('select-dropdown content repeats-order-datatype')">
+                                        <i class="fas fa-caret-down"></i>
+                                    </div>
+                                </div>
+                                <div style="background-color: #dedede; color: #303030; position: absolute;" class="select-dropdown content repeats-order-datatype inactive">
+                                    <div style="padding: 2px 5px" onclick="orderedRepeatsOrderDataTypeChange('Frequency')">Frequency</div>
+                                    <div style="padding: 2px 5px" onclick="orderedRepeatsOrderDataTypeChange('Bases')">Bases</div>
+                                </div>
+                            </div>
+                            <div style="padding: 5px 10px; margin-top: 10px;"> Repeats </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="plot-button" onclick="updateChart()">Apply</div>
+            </div>
+
+            <div id="charts-area"  style="width: 90%; margin-top: 80px; z-index: 1;">
+
+                <div style="text-align: center;font-weight: bold; font-size: 1.2em;">Parameters</div>
+                <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-evenly; align-items: baseline;">
+                    <div style="margin-top: 30px; padding: 0px 15px" class="parameters repeat-distribution">
+                        <input type="checkbox" style="cursor: pointer;" onclick="showPercentagesChange()" id="percentage-checkbox"> Percentage of Total
+                    </div>
+    
+                    <div style="margin-top: 30px; padding: 0px 15px" class="parameters repeat-abundance repeat-distribution" >
+                        Data type:
+                        <!-- <span style="white-space: nowrap;">
+                            <input class="radio-option" checked type="radio" id="Reads" name="dataType" value="Reads" onclick="repeatAbundanceDataTypeChange('Reads')">
+                            <label class="radio-option" for="Reads" onclick="repeatAbundanceDataTypeChange('Reads')">Reads</label>
+                        </span> -->
+                        <span style="white-space: nowrap;">
+                            <input class="radio-option" type="radio" id="Bases" name="dataType" value="Bases" checked onclick="repeatAbundanceDataTypeChange('Bases')">
+                            <label class="radio-option" for="Bases" onclick="repeatAbundanceDataTypeChange('Bases')">Bases</label>
+                        </span>
+                        <span style="white-space: nowrap;">
+                            <input class="radio-option" checked type="radio" id="Frequency" name="dataType" value="Frequency" onclick="repeatAbundanceDataTypeChange('Frequency')">
+                            <label class="radio-option" for="Frequency" onclick="repeatAbundanceDataTypeChange('Frequency')">Frequency</label>
+                        </span>
+                    </div>
+
+                    <div style="margin-top: 30px; padding: 0px 15px" class="parameters repeat-abundance length-abundance" >
+                        <label for="min-length">Min-Length: </label>
+                        <input type="number" style="margin-left: 10px" onchange="updateLengthChange('min')" id="min-length" name="min-length">
+                        <span style="margin-left: 2px;">bp</span>
+                    </div>
+                    <div style="margin-top: 30px; padding: 0px 15px" class="parameters repeat-abundance length-abundance" >
+                        <label for="max-length">Max-Length: </label>
+                        <input type="number" style="margin-left: 10px" onchange="updateLengthChange('max')" id="max-length" name="max-length">
+                        <span style="margin-left: 2px;">bp</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; height: 60vh; width: 80vw" id="plot-area"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="footer" style="padding: 30px; width: 100%; background-color: #303030; color: white; margin-top: 60px; text-align: center;">
+        <div>Developed by the <a href="https://e-portal.ccmb.res.in/e-space/rakeshmishra/bioinformatics/" target="_blank">Bioinformatics Centre</a>, CSIR-CCMB</div>
+        <div>Copyright 2020 © CSIR-Centre for Cellular and Molecular Biology, Uppal Road, Hyderabad - 500007, Telangana, India</div>
+    </div>
+</body>
+<script>
+    {jquery_js}
+</script>
+<script>
+    {multiselect_js}
+</script>
+<script>
+    {echarts_js}
+</script>
+<script>
+    {analyse_data_js}
+</script>
+<script>
+    {main_js}
+</script>
+<script>
+    {tables_js}
+</script>
+</html>
