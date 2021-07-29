@@ -64,7 +64,7 @@ def getArgs():
     """
     Parses command line arguments and returns them to the caller
     """
-    __version__ = 'v0.1.0'
+    __version__ = 'v0.1.1'
     parser = argparse.ArgumentParser()
     parser._action_groups.pop()
 
