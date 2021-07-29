@@ -84,7 +84,7 @@ int main(int argc, char* argv[]) {
                     case 'c': case 'C': window.seq |= 1ull; GC += 1; break;
                     case 'g': case 'G': window.seq |= 2ull; GC += 1; break;
                     case 't': case 'T': window.seq |= 3ull; break;
-                    case 'N': case 'n': 
+                    default: 
                         window.seq = 0; window.cutoff = -1;
                         if (start != -1) {
                             end = window.count; rlen = end - start;
@@ -102,7 +102,6 @@ int main(int argc, char* argv[]) {
                         compound_repeat.reset();
                         start = -1;
                         break;
-                    default: continue;
                 }
                 gsize += 1;
                 window.count += 1;

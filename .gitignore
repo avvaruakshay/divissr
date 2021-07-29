@@ -5,3 +5,4 @@ dist/*
 build/*
 api_token
 ./.pypirc
+divissr.egg-info/*

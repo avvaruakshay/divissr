@@ -112,7 +112,7 @@ int main(int argc, char *argv[]) {
                 case 'c': case 'C': window.seq |= 1ull; break;
                 case 'g': case 'G': window.seq |= 2ull; break;
                 case 't': case 'T': window.seq |= 3ull; break;
-                case 'N': case 'n': 
+                default: 
                     // resets the window when an N is encountered
                     window.seq = 0; window.cutoff = -1;
                     if (start != -1) {
@@ -123,7 +123,6 @@ int main(int argc, char *argv[]) {
                     }
                     start = -1;
                     break;
-                default: continue;
             }
             window.count += 1;
             window.cutoff += 1;

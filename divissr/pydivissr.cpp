@@ -38,8 +38,8 @@ int main(int argc, char* argv[]) {
     uint N = 3;
     uint64_t divisor[3] = {4097,16400,65793};
     uint rem_shift[3] = {24,20,24};
-    uint compound = 0;;
-    int overlap_d = 0;;
+    uint compound = 0;
+    int overlap_d = 0;
     int sequences = 1;
 
     cout << '\n' << "Searching for tandem repeats in " << fin << '\n';
@@ -88,12 +88,13 @@ int main(int argc, char* argv[]) {
         }
         else {
             for(const auto c: line) {
+                // cout << window.count << "\t" << c << "\n";
                 switch(c) {
                     case 'a': case 'A': break;
                     case 'c': case 'C': window.seq |= 1ull; GC += 1; break;
                     case 'g': case 'G': window.seq |= 2ull; GC += 1; break;
                     case 't': case 'T': window.seq |= 3ull; break;
-                    case 'N': case 'n':
+                    default:
                         window.seq = 0; window.cutoff = -1;
                         if (start != -1) {
                             end = window.count; rlen = end - start;
@@ -111,7 +112,6 @@ int main(int argc, char* argv[]) {
                         compound_repeat.reset();
                         start = -1;
                         break;
-                    default: continue;
                 }
                 gsize += 1;
                 window.count += 1;
@@ -130,6 +130,9 @@ int main(int argc, char* argv[]) {
                                 if (atomicity >= m) {
 
                                     start = window.count - cutoff;
+                                    if (start == 51570043) {
+                                        cout << "\n\n\n" << window.count << "\t" << c << "\n";
+                                    }
                                     motif = utils::bit2base(window.seq, cutoff, atomicity);
                                     if (rclass_map.find(motif) != rclass_map.end()) {
                                         repeat_class = rclass_map[motif];

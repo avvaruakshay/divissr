@@ -1,0 +1,3 @@
+[console_scripts]
+divissr = divissr.core:main
+
