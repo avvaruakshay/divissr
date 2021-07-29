@@ -7,7 +7,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name = 'divissr',
-    version = '0.1.0',
+    version = '0.1.1',
     author = 'Akshay Avvaru',
     author_email = 'avvaru@ccmb.res.in',
     description = 'DiviSSR is a DNA tandem repeat identification tool',
