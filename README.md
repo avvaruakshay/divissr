@@ -232,6 +232,9 @@ region. Default 1000.
 ## Change log
 ### v 0.1.1
 
+### v 0.1.2
+- Solved compound repeat error for gzipped fasta input
+
 1. Handling error of non ACGTN nucleotides.
 
 ## Contact

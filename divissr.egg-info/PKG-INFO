@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: divissr
-Version: 0.1.0
+Version: 0.1.2
 Summary: DiviSSR is a DNA tandem repeat identification tool
 Home-page: https://github.com/avvaruakshay/divissr.git
 Author: Akshay Avvaru
@@ -245,9 +245,14 @@ region. Default 1000.
 Downstream distance(bp) from the TSS of the gene to be considered as promoter 
 region. Default 1000.
 
+## Change log
+### v 0.1.1
+
+1. Handling error of non ACGTN nucleotides.
+
 ## Contact
 For queries or suggestions, please contact:
 
-Divya Tej Sowpati - <tej@ccmb.res.in><br>
-Akshay Kumar Avvaru - <avvaru@ccmb.res.in>
+Akshay Kumar Avvaru - <avvaru@ccmb.res.in><br>
+Divya Tej Sowpati - <tej@ccmb.res.in>
 

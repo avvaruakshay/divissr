@@ -175,7 +175,7 @@ int main(int argc, char* argv[]) {
     if (start != -1) {
         end = window.count; rlen = end - start;
         if (compound) {
-            compound_repeat.edn = end;
+            compound_repeat.end = end;
             if (compound_repeat.motif.size() > 1) {
                 compound_repeat.report();
                 comp_out << compound_repeat.output << '\n';
